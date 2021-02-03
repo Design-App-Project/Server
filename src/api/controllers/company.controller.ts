@@ -20,12 +20,11 @@ export class CompanyController {
 
     const data: ICompany = await companyModel.read();
 
+    // console.log(Object.keys(data).length);
     try {
       if (data) {
-        console.log(data);
         res.status(200).json({
           success: true,
-          message: ``,
           result: data,
         });
       }

@@ -14,13 +14,12 @@ export class CompanyModel {
   constructor() {}
 
   async create(fields: any) {
-    console.log(fields);
     const company: any = new Company(fields);
     return await company.save();
   }
 
   async read() {
-    return await Company.find({ title: "APPLE" });
+    return await Company.find();
   }
 }
 
