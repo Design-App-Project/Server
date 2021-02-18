@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 
 export interface ICompany extends mongoose.Document {
+  category: string;
   img_path: string;
   title: string;
   address: string;
@@ -8,6 +9,7 @@ export interface ICompany extends mongoose.Document {
   sample_imgs: [string];
   likes: number;
   tag: [string];
+  open: [string];
 }
 
 export class CompanyModel {
@@ -18,12 +20,37 @@ export class CompanyModel {
     return await company.save();
   }
 
-  async read() {
-    return await Company.find();
+  async read(fields: any) {
+    if (!fields) {
+      return await Company.find();
+    } else if (typeof fields === "object") {
+      let companyList = [{}];
+
+      companyList.shift();
+
+      for (let item in fields) {
+        let a = await Company.find({ category: fields[item] });
+
+        for (let item in a) {
+          companyList.push(a[item]);
+        }
+      }
+      return companyList;
+    } else {
+      return false;
+    }
+  }
+
+  async update(fields: any) {
+    const company: any = new Company(fields);
+    return await company.save();
   }
 }
 
 const schema: mongoose.Schema = new mongoose.Schema({
+  category: {
+    type: String,
+  },
   img_path: {
     type: String,
   },
@@ -43,6 +70,9 @@ const schema: mongoose.Schema = new mongoose.Schema({
     type: Number,
   },
   tag: {
+    type: [String],
+  },
+  open: {
     type: [String],
   },
 });

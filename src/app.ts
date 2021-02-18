@@ -2,6 +2,7 @@ import express from "express";
 
 import { Models } from "./api/models";
 import { CompanyRoute } from "./api/routes/v1/company.route";
+import { EditTypeOfDbFiled } from "./api/utils/editTypeOfDbField.util";
 
 const app: express.Application = express();
 const routes: any = [];
@@ -20,6 +21,9 @@ app.use(function (req, res, next) {
 
 //route
 routes.push(new CompanyRoute(app));
+
+//editCsvUtil
+// new EditTypeOfDbFiled().StringToArray();
 
 app.get(
   "/",

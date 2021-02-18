@@ -1,5 +1,4 @@
 import { Application } from "express";
-import { Request, Response } from "express";
 import { CompanyController } from "../../controllers/company.controller";
 
 export class CompanyRoute {
@@ -12,7 +11,8 @@ export class CompanyRoute {
 
   configure() {
     const companyController = new CompanyController();
-    this.app.post("/api/v1/test-input", [companyController.createCompany]);
+    // this.app.post("/api/v1/test-input", [companyController.createCompanies]);
     this.app.get("/api/v1/material", [companyController.getAllData]);
+    this.app.get("/api/v1/testURL", [companyController.getFilteredData]);
   }
 }

@@ -2,11 +2,13 @@ import { Request, Response } from "express";
 import { CompanyModel, ICompany } from "../models/company.model";
 
 export class CompanyController {
-  constructor() {}
+  private companyModel: CompanyModel;
+  constructor() {
+    this.companyModel = new CompanyModel();
+  }
 
   createCompany = async (req: Request, res: Response) => {
-    const companyModel = new CompanyModel();
-    await companyModel.create(req.body);
+    await this.companyModel.create(req.body);
 
     res.status(200).send({
       success: true,
@@ -16,19 +18,30 @@ export class CompanyController {
   };
 
   getAllData = async (req: Request, res: Response) => {
-    const companyModel = new CompanyModel();
+    const data: ICompany = await this.companyModel.read("");
 
-    const data: ICompany = await companyModel.read();
+    if (data) {
+      res.status(200).json({
+        success: true,
+        result: data,
+      });
+    } else {
+      res.status(404).send({
+        success: false,
+        messgae: "Not found",
+        result: null,
+      });
+    }
+  };
 
-    // console.log(Object.keys(data).length);
-    try {
-      if (data) {
-        res.status(200).json({
-          success: true,
-          result: data,
-        });
-      }
-    } catch (err) {
+  getFilteredData = async (req: Request, res: Response) => {
+    const data: ICompany = await this.companyModel.read(req.body.category);
+    if (data) {
+      res.status(200).json({
+        success: true,
+        result: data,
+      });
+    } else {
       res.status(404).send({
         success: false,
         messgae: "Not found",
