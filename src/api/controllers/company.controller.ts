@@ -35,7 +35,8 @@ export class CompanyController {
   };
 
   getFilteredData = async (req: Request, res: Response) => {
-    const data: ICompany = await this.companyModel.read(req.body.category);
+    const data: ICompany = await this.companyModel.read(req.body);
+
     if (data) {
       res.status(200).send({
         success: true,

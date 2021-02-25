@@ -21,7 +21,7 @@ export class CompanyModel {
   }
 
   async read(fields: any) {
-    if (!fields) {
+    if (!fields.category[0]) {
       return await Company.find();
     } else if (typeof fields === "object") {
       let companyList = [{}];
