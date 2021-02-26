@@ -18,7 +18,7 @@ export class CompanyController {
   };
 
   getAllData = async (req: Request, res: Response) => {
-    const data: ICompany = await this.companyModel.read("");
+    const data: ICompany = await this.companyModel.readAllData("");
 
     if (data) {
       res.status(200).json({
@@ -35,7 +35,7 @@ export class CompanyController {
   };
 
   getFilteredData = async (req: Request, res: Response) => {
-    const data: ICompany = await this.companyModel.read(req.body);
+    const data: ICompany = await this.companyModel.readFilteredData(req.body);
 
     if (data) {
       res.status(200).send({

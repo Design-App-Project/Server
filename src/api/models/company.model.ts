@@ -20,7 +20,11 @@ export class CompanyModel {
     return await company.save();
   }
 
-  async read(fields: any) {
+  async readAllData(fields: any) {
+    return await Company.find();
+  }
+
+  async readFilteredData(fields: any) {
     if (!fields.category[0]) {
       return await Company.find();
     } else if (typeof fields === "object") {
