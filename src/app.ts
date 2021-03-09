@@ -7,11 +7,11 @@ import { Models } from "./api/models";
 import { CompanyRoute } from "./api/routes/v1/company.route";
 import { EditTypeOfDbFiled } from "./api/utils/editTypeOfDbField.util";
 import { AuthMiddleware } from './api/middlewares/auth.middleware';
-import { PassportConfig } from './api/utils/passport.local.util';
+// import { PassportConfig } from './api/utils/passport.local.util';
 
 const app: express.Application = express();
 const routes: any = [];
-const passportConfig = new PassportConfig();
+// const passportConfig = new PassportConfig();
 const root = path.join(__dirname, 'client');
 (async () => {
   await new Models().init();
@@ -25,9 +25,9 @@ app.use(express.json({ limit: '5mb' }));
 app.use(cookieParser());
 
 // passport config
-app.use(passport.initialize());
-app.use(passport.session());
-passportConfig.run();
+// app.use(passport.initialize());
+// app.use(passport.session());
+// passportConfig.run();
 
 // cors config
 app.use(function (req, res, next) {
