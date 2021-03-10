@@ -7,8 +7,9 @@ import { Models } from "./api/models";
 import { PassportConfig } from "./api/utils/passport.local.util";
 import { IndexRoute } from "./api/routes/v1/index.route";
 import { CompanyRoute } from "./api/routes/v1/company.route";
-import { AuthMiddleware } from "./api/middlewares/auth.middleware";
 import { EditTypeOfDbFiled } from "./api/utils/editTypeOfDbField.util";
+import { AuthMiddleware } from './api/middlewares/auth.middleware';
+// import { PassportConfig } from './api/utils/passport.local.util';
 
 const app: express.Application = express();
 const routes: any = [];
@@ -28,7 +29,7 @@ passportConfig.run();
 
 // cors config
 app.use(function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", "nanobook.co.kr");
+  res.header("Access-Control-Allow-Origin", "3.18.72.134");
   res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
   res.header(
     "Access-Control-Allow-Headers",
