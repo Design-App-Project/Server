@@ -13,7 +13,7 @@ import { AuthMiddleware } from "./api/middlewares/auth.middleware";
 const app: express.Application = express();
 const routes: any = [];
 const passportConfig = new PassportConfig();
-const root = path.join(__dirname, "public");
+const root = path.join(__dirname, "client");
 (async () => {
   await new Models().init();
 })();
@@ -45,7 +45,7 @@ app.use("/api/*", AuthMiddleware.blockCSRF);
 
 //route
 routes.push(new CompanyRoute(app));
-routes.push(new IndexRoute(app));
+// routes.push(new IndexRoute(app));
 
 //editCsvUtil
 // new EditTypeOfDbFiled().StringToArray();

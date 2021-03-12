@@ -6,10 +6,7 @@ export class IndexController {
   constructor() {}
 
   async sendIndex(req: Request, res: Response) {
-    const root = path.join(__dirname, "../../client/public");
-    console.log("root:", root);
-    console.log("__dirname:", __dirname);
-
+    const root = path.join(__dirname, "../../client");
     // res.sendFile("index.html", { root });
     res.sendFile("index.html", { root }, function (err) {
       if (err) {
