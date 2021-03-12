@@ -8,17 +8,18 @@ import { PassportConfig } from "./api/utils/passport.local.util";
 import { IndexRoute } from "./api/routes/v1/index.route";
 import { CompanyRoute } from "./api/routes/v1/company.route";
 import { EditTypeOfDbFiled } from "./api/utils/editTypeOfDbField.util";
-import { AuthMiddleware } from './api/middlewares/auth.middleware';
-// import { PassportConfig } from './api/utils/passport.local.util';
+import { AuthMiddleware } from "./api/middlewares/auth.middleware";
 
 const app: express.Application = express();
 const routes: any = [];
 const passportConfig = new PassportConfig();
-const root = path.join(__dirname, "client");
+const root = path.join(__dirname, "public");
 (async () => {
   await new Models().init();
 })();
 
+// views setting
+app.use(express.static(root));
 app.use(express.json({ limit: "5mb" }));
 app.use(cookieParser());
 

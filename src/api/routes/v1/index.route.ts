@@ -12,7 +12,6 @@ export class IndexRoute {
 
   configure() {
     const indexController = new IndexController();
-
     this.app.get("/*", [indexController.sendIndex]);
   }
 }
