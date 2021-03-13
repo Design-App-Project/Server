@@ -25,12 +25,10 @@ export class CompanyModel {
   }
 
   async readFilteredData(fields: any) {
-    if (!fields.category[0]) {
+    if (fields.category[0] === undefined) {
       return await Company.find();
-    } else if (typeof fields === "object") {
-      let companyList = [{}];
-
-      companyList.shift();
+    } else {
+      let companyList: object[] = [];
 
       for (let item in fields) {
         let a = await Company.find({ category: fields[item] });
@@ -40,8 +38,6 @@ export class CompanyModel {
         }
       }
       return companyList;
-    } else {
-      return false;
     }
   }
 

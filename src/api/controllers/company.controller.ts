@@ -13,7 +13,7 @@ export class CompanyController {
     res.status(200).send({
       success: true,
       message: "",
-      result: {},
+      results: {},
     });
   };
 
@@ -36,8 +36,7 @@ export class CompanyController {
 
   getFilteredData = async (req: Request, res: Response) => {
     const data: ICompany = await this.companyModel.readFilteredData(req.body);
-
-    if (data) {
+    if (data[0]) {
       res.status(200).send({
         success: true,
         result: data,
@@ -47,6 +46,7 @@ export class CompanyController {
         success: false,
         messgae: "Not found",
         result: null,
+        errors: false,
       });
     }
   };

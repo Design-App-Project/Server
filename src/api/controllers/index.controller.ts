@@ -7,13 +7,6 @@ export class IndexController {
 
   async sendIndex(req: Request, res: Response) {
     const root = path.join(__dirname, "../../client");
-    // res.sendFile("index.html", { root });
-    res.sendFile("index.html", { root }, function (err) {
-      if (err) {
-        console.log(err);
-      } else {
-        console.log("not error");
-      }
-    });
+    res.sendFile("index.html", { root });
   }
 }

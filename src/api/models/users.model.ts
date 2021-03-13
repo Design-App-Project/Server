@@ -1,23 +1,18 @@
-import { request } from "express";
 import mongoose from "mongoose";
 
 export interface IUser extends mongoose.Document {
   id: string;
   pwd: string;
-  bookmark: [string];
-  selected: boolean;
-  name: string;
-  introduce: string;
-  interest: string;
 }
 
-type UserKey = "nickname" | "email" | "id";
+type UserKey = "id";
 
 export class UsersModel {
   constructor() {}
 
   async create(fields: any) {
     const user: any = new Users(fields);
+    console.log(user);
     return await user.save();
   }
 
@@ -48,22 +43,6 @@ const schema: mongoose.Schema = new mongoose.Schema({
   salt: {
     type: String,
     default: "",
-  },
-  bookmark: {
-    type: [String],
-  },
-  selected: {
-    type: Boolean,
-  },
-  name: {
-    type: String,
-    required: true,
-  },
-  introduce: {
-    type: String,
-  },
-  interest: {
-    type: String,
   },
 });
 
