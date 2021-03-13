@@ -55,7 +55,7 @@ export class AuthMiddleware {
         if (!user) {
           throw ErrorUtil.unAuthorized(
             `User's informations are wrong.`,
-            "아이디와 비밀번호를 확인해주세요."
+            "아이디 혹은 비밀번호를 확인해주세요."
           );
         }
 

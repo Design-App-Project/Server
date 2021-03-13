@@ -1,8 +1,10 @@
 import { Request, Response } from "express";
 
 import { UsersModel, IUser } from "../models/users.model";
+import { IQuestion, Question } from "../models/question.model";
 import { HashUtil } from "../utils/hash.util";
 import { ResponseUtil } from "../utils/response.util";
+import { ErrorUtil } from "../utils/error.util";
 
 import * as crypto from "crypto";
 
@@ -23,6 +25,22 @@ export class UsersController {
   async assureUniqueValue(req: Request, res: Response) {
     console.log("assure");
     res.status(200).send(ResponseUtil.successTrue({}));
+  }
+
+  async createUserQuestion(req: Request, res: Response) {
+    const question: IQuestion = new Question(req.body);
+    const data = await question.save();
+    if (data) {
+      res
+        .status(200)
+        .send(ResponseUtil.successTrue({}, "문의하기 성공하였습니다."));
+    } else {
+      const error = ErrorUtil.badRequest(
+        "",
+        "파일형식이 잘못되었습니다. or save실패"
+      );
+      res.status(error.status).send(ResponseUtil.successFalse(error));
+    }
   }
 
   //   async allowedNickname(req: Request, res: Response) {

@@ -29,5 +29,7 @@ export class UsersRoute {
       usersMiddleware.checkAlreadyID,
       usersController.assureUniqueValue,
     ]);
+
+    this.app.post("/api/v1/question", [usersController.createUserQuestion]);
   }
 }

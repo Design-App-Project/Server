@@ -42,7 +42,14 @@ export class AuthController {
         maxAge: 1000 * parseInt(jwtUtil.refreshTokenLife),
       });
 
-      res.status(200).send(ResponseUtil.successTrue({}));
+      res
+        .status(200)
+        .send(
+          ResponseUtil.successTrue(
+            { id: user.id, isUser: true },
+            "로그인에 성공했습니다."
+          )
+        );
     } catch (err) {
       res.status(500).send(err);
     }
