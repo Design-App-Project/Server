@@ -11,8 +11,13 @@ export class CompanyRoute {
 
   configure() {
     const companyController = new CompanyController();
-    // this.app.post("/api/v1/test-input", [companyController.createCompanies]);
+
     this.app.get("/api/v1/material", [companyController.getAllData]);
+
+    this.app.post("/api/v1/company", [companyController.addCompany]);
+
+    this.app.delete("/api/v1/company", [companyController.removeCompany]);
+
     this.app.post("/api/v1/filtering", [companyController.getFilteredData]);
   }
 }

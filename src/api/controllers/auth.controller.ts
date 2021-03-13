@@ -17,7 +17,6 @@ export class AuthController {
 
     const usersModel = new UsersModel();
     const user = await usersModel.read("id", req.body.id);
-    console.log(user);
     const accessPayload: PayloadAccessToken = {
       id: user.id,
       issuer: "http://3.18.72.134/",
