@@ -12,7 +12,6 @@ export class UsersModel {
 
   async create(fields: any) {
     const user: any = new Users(fields);
-    console.log(user);
     return await user.save();
   }
 

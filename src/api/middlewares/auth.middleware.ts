@@ -5,7 +5,6 @@ import passport from "passport";
 
 import { ErrorUtil } from "../utils/error.util";
 import { ResponseUtil } from "../utils/response.util";
-import AuthSchema from "./schemas/auth.middleware.schema";
 import JWTUtil from "../utils/jwt.util";
 
 export class AuthMiddleware {
@@ -15,22 +14,6 @@ export class AuthMiddleware {
     this.ajv = new Ajv();
     addFormat(this.ajv);
   }
-
-  validatePostSignin = async (
-    req: Request,
-    res: Response,
-    next: NextFunction
-  ) => {
-    const validate = this.ajv.compile(AuthSchema.PostAuthSigninSchema);
-
-    if (!validate(req.body)) {
-      const error = (validate.errors as DefinedError[])[0];
-      const errorUtil = ErrorUtil.ajv(error);
-      res.status(errorUtil.status).send(ResponseUtil.successFalse(errorUtil));
-    }
-
-    next();
-  };
 
   verifyToken = async (req: Request, res: Response, next: NextFunction) => {
     const path = req.route.path;
@@ -69,7 +52,6 @@ export class AuthMiddleware {
         if (err) {
           throw ErrorUtil.internal("an error occurs : local passport");
         }
-
         if (!user) {
           throw ErrorUtil.unAuthorized(
             `User's informations are wrong.`,

@@ -15,7 +15,6 @@ export class UsersRoute {
   configure() {
     const usersController = new UsersController();
     const usersMiddleware = new UsersMiddleware();
-    // const authMiddleware = new AuthMiddleware();
 
     this.app.post("/api/v1/user/signup", [
       usersMiddleware.validatePostSignup,
@@ -31,10 +30,4 @@ export class UsersRoute {
       usersController.assureUniqueValue,
     ]);
   }
-  // this.app.put('/api/v1/user/password', [
-  //   usersMiddleware.validatePutReset,
-  //   usersMiddleware.allowUserEmail,
-  //   authMiddleware.checkEmailAuthenticated,
-  //   usersController.updateUser,
-  // ]);
 }

@@ -11,7 +11,6 @@ export class HashUtil {
 
   static getHashedValue(value: string, saltValue?: string) {
     let salt = saltValue ?? crypto.randomBytes(16).toString("base64");
-    console.log("hash", salt);
     let hashedValue = crypto
       .createHmac("sha512", salt)
       .update(value)

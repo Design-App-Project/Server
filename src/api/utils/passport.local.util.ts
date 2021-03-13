@@ -23,21 +23,20 @@ export class PassportConfig {
       new LocalStrategy(
         {
           usernameField: "id",
-          passwordField: "password",
+          passwordField: "pwd",
           //session: true,             // session 저장 여부
         },
 
         async (id: string, pwd: string, done) => {
           const usersModel: UsersModel = new UsersModel();
           const user = await usersModel.read("id", id, false);
-
           if (!user)
             return done(null, false, {
               message: "아이디 혹은 비밀번호를 확인해주세요.",
             });
 
           let hashedPassword = HashUtil.getHashedValue(pwd, user.salt);
-          const isMatch = user.password == hashedPassword;
+          const isMatch = user.pwd == hashedPassword;
 
           if (isMatch) {
             return done(null, user);

@@ -10,6 +10,7 @@ import { CompanyRoute } from "./api/routes/v1/company.route";
 import { EditTypeOfDbFiled } from "./api/utils/editTypeOfDbField.util";
 import { AuthMiddleware } from "./api/middlewares/auth.middleware";
 import { UsersRoute } from "./api/routes/v1/users.route";
+import { AuthRoute } from "./api/routes/v1/auth.route";
 
 const app: express.Application = express();
 const routes: any = [];
@@ -48,6 +49,7 @@ app.use("/api/*", AuthMiddleware.blockCSRF);
 routes.push(new CompanyRoute(app));
 routes.push(new IndexRoute(app));
 routes.push(new UsersRoute(app));
+routes.push(new AuthRoute(app));
 
 //editCsvUtil
 // new EditTypeOfDbFiled().StringToArray();
