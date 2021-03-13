@@ -35,7 +35,6 @@ export class CompanyController {
   // 업체 추가 api
   addCompany = async (req: Request, res: Response) => {
     await this.companyModel.create(req.body);
-
     res.status(200).send(ResponseUtil.successTrue({}, ""));
   };
 
