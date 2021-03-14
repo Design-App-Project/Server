@@ -16,14 +16,14 @@ export class AuthController {
     const jwtUtil = new JWTUtil();
 
     const usersModel = new UsersModel();
-    const user = await usersModel.read("id", req.body.id);
+    const user = await usersModel.read("id", req.body.user_id);
     const accessPayload: PayloadAccessToken = {
-      id: user.id,
+      id: user.user_id,
       issuer: "http://3.18.72.134/",
     };
 
     const refreshPayload: PayloadRefreshToken = {
-      id: user.id,
+      id: user.user_id,
       issuer: "http://3.18.72.134/",
     };
 
@@ -54,7 +54,7 @@ export class AuthController {
     const jwtUtil = new JWTUtil();
 
     const usersModel = new UsersModel();
-    const user = await usersModel.read("id", req.body.decoded.id);
+    const user = await usersModel.read("id", req.body.decoded.user_id);
 
     if (!user) {
       const error = jwtUtil.invalidTokenError;
@@ -62,7 +62,7 @@ export class AuthController {
     }
 
     const accessPayload: PayloadAccessToken = {
-      id: user.id,
+      id: user.user_id,
       issuer: "http://3.18.72.134/",
     };
 

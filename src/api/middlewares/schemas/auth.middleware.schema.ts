@@ -2,14 +2,14 @@ export const AuthSchema = {
   PostSigninSchema: {
     type: "object",
     properties: {
-      id: {
+      user_id: {
         type: "string",
       },
       pwd: {
         type: "string",
       },
     },
-    required: ["id", "pwd"],
+    required: ["user_id", "pwd"],
     additionalProperties: false,
   },
 };

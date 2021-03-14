@@ -1,10 +1,10 @@
 export const PostUserIsAlreadyIDSchema = {
   type: "object",
   properties: {
-    id: {
+    user_id: {
       type: "string",
     },
   },
-  required: ["id"],
+  required: ["user_id"],
   additionalProperties: true,
 };

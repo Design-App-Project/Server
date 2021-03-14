@@ -57,7 +57,7 @@ export class UsersMiddleware {
   checkAlreadyID = async (req: Request, res: Response, next: NextFunction) => {
     const usersModel: UsersModel = new UsersModel();
 
-    const user: IUser = await usersModel.read("id", req.body.id);
+    const user: IUser = await usersModel.read("id", req.body.user_id);
     if (!user) {
       next();
     } else {
@@ -67,7 +67,7 @@ export class UsersMiddleware {
   };
 
   isNull = async (req: Request, res: Response, next: NextFunction) => {
-    if (req.body.id == "") {
+    if (req.body.user_id == "") {
       const error = ErrorUtil.badRequest("", "아이디는 필수 사항입니다.");
       res.status(error.status).send(ResponseUtil.successFalse(error));
     } else {

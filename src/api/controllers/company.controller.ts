@@ -81,7 +81,7 @@ export class CompanyController {
 
   deleteUserInfo = async (req: Request, res: Response) => {
     const data: IUser = await Users.findOneAndDelete({
-      id: req.body.id,
+      user_id: req.body.user_id,
     });
     if (data) {
       res
