@@ -83,7 +83,6 @@ export class CompanyController {
     const data: IUser = await Users.findOneAndDelete({
       id: req.body.id,
     });
-    console.log("data:", data);
     if (data) {
       res
         .status(200)
