@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 
-import { UsersModel, IUser } from "../models/users.model";
+import { UsersModel, IUser, Users } from "../models/users.model";
 import { IQuestion, Question } from "../models/question.model";
 import { HashUtil } from "../utils/hash.util";
 import { ResponseUtil } from "../utils/response.util";
@@ -45,6 +45,13 @@ export class UsersController {
     }
   }
 
+  async getProfile(req: Request, res: Response) {
+    const user: IUser = await Users.findOne({
+      user_id: req.body.decoded.user_id,
+    });
+    res.status(200).send(ResponseUtil.successTrue(user));
+  }
+
   //   async allowedNickname(req: Request, res: Response) {
   //     res.status(200).send(ResponseUtil.successTrue({}, ""));
   //   }
@@ -64,12 +71,6 @@ export class UsersController {
   //     res
   //       .status(200)
   //       .send(ResponseUtil.successTrue({}, "비밀번호가 변경되었습니다."));
-  //   }
-
-  //   async getProfile(req: Request, res: Response) {
-  //     const userModel = new UsersModel();
-  //     const user = await userModel.readByEmail(req.body.decoded.email);
-  //     res.status(200).send(ResponseUtil.successTrue(user));
   //   }
 
   //   async deleteUser(req: Request, res: Response) {
