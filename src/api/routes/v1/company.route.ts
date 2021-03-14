@@ -15,5 +15,13 @@ export class CompanyRoute {
     this.app.get("/api/v1/material", [companyController.getAllData]);
 
     this.app.post("/api/v1/filtering", [companyController.getFilteredData]);
+
+    this.app.get("/api/v1/question", [companyController.getQuestions]);
+
+    this.app.get("/api/v1/user", [companyController.getUserInfo]);
+
+    this.app.post("/api/v1/company", [companyController.addCompany]);
+
+    this.app.delete("/api/v1/company", [companyController.removeCompany]);
   }
 }

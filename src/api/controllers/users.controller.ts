@@ -19,7 +19,9 @@ export class UsersController {
     req.body.salt = salt;
 
     await usersModel.create(req.body);
-    res.status(200).send(ResponseUtil.successTrue({}, ""));
+    res
+      .status(200)
+      .send(ResponseUtil.successTrue({}, "회원가입에 성공하셨습니다."));
   }
 
   async assureUniqueValue(req: Request, res: Response) {

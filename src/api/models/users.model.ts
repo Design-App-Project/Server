@@ -3,6 +3,11 @@ import mongoose from "mongoose";
 export interface IUser extends mongoose.Document {
   id: string;
   pwd: string;
+  bookmark: [string];
+  selected: boolean;
+  name: string;
+  introduce: string;
+  interest: string;
 }
 
 type UserKey = "id";
@@ -38,6 +43,26 @@ const schema: mongoose.Schema = new mongoose.Schema({
   pwd: {
     type: String,
     required: true,
+  },
+  bookmark: {
+    type: [String],
+    required: false,
+  },
+  selected: {
+    type: Boolean,
+    required: false,
+  },
+  name: {
+    type: String,
+    required: false,
+  },
+  introduce: {
+    type: String,
+    required: false,
+  },
+  interest: {
+    type: String,
+    required: false,
   },
   salt: {
     type: String,

@@ -45,6 +45,9 @@ export class CompanyModel {
     const company: any = new Company(fields);
     return await company.save();
   }
+  async remove(fields: any) {
+    return Company.findOneAndDelete({ title: fields });
+  }
 }
 
 const schema: mongoose.Schema = new mongoose.Schema({

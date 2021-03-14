@@ -11,7 +11,6 @@ import { EditTypeOfDbFiled } from "./api/utils/editTypeOfDbField.util";
 import { AuthMiddleware } from "./api/middlewares/auth.middleware";
 import { UsersRoute } from "./api/routes/v1/users.route";
 import { AuthRoute } from "./api/routes/v1/auth.route";
-import { adminRoute } from "./api/routes/v1/admin.route";
 
 const app: express.Application = express();
 const routes: any = [];
@@ -51,7 +50,6 @@ routes.push(new CompanyRoute(app));
 routes.push(new IndexRoute(app));
 routes.push(new UsersRoute(app));
 routes.push(new AuthRoute(app));
-routes.push(new adminRoute(app));
 
 //editCsvUtil
 // new EditTypeOfDbFiled().StringToArray();
