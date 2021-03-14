@@ -46,11 +46,23 @@ export class UsersController {
   }
 
   async getProfile(req: Request, res: Response) {
-    console.log(req.body);
     const user: IUser = await Users.findOne({
       user_id: req.body.decoded.id,
     });
     res.status(200).send(ResponseUtil.successTrue(user));
+  }
+
+  async editUserInfo(req: Request, res: Response) {
+    const filter = {
+      user_id: req.body.decoded.id,
+    };
+    const value = {
+      name: req.body.decoded.name,
+      introduce: req.body.decoded.introduce,
+      interest: req.body.decoded.interest,
+    };
+    const user: IUser = await Users.findOneAndUpdate(filter, value);
+    res.status(200).send(ResponseUtil.successTrue({}, ""));
   }
 
   //   async allowedNickname(req: Request, res: Response) {

@@ -37,5 +37,10 @@ export class UsersRoute {
     ]);
 
     this.app.post("/api/v1/question", [usersController.createUserQuestion]);
+
+    this.app.put("/api/v1/user", [
+      authMiddleware.verifyToken,
+      usersController.editUserInfo,
+    ]);
   }
 }
