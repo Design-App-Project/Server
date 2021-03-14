@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 export interface IUser extends mongoose.Document {
-  id: string;
+  user_id: string;
   pwd: string;
   bookmark: [string];
   selected: boolean;
@@ -36,7 +36,7 @@ export class UsersModel {
 }
 
 const schema: mongoose.Schema = new mongoose.Schema({
-  id: {
+  user_id: {
     type: String,
     required: true,
   },

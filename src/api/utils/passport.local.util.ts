@@ -22,14 +22,14 @@ export class PassportConfig {
     passport.use(
       new LocalStrategy(
         {
-          usernameField: "id",
+          usernameField: "user_id",
           passwordField: "pwd",
           //session: true,             // session 저장 여부
         },
 
-        async (id: string, pwd: string, done) => {
+        async (user_id: string, pwd: string, done) => {
           const usersModel: UsersModel = new UsersModel();
-          const user = await usersModel.read("id", id, false);
+          const user = await usersModel.read("id", user_id, false);
           if (!user)
             return done(null, false, {
               message: "아이디 혹은 비밀번호를 확인해주세요.",

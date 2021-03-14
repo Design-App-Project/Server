@@ -1,7 +1,7 @@
 export const PostUserSignupSchema = {
   type: "object",
   properties: {
-    id: {
+    user_id: {
       type: "string",
       pattern: "^[a-z|A-Z|0-9]{1,}",
     },
@@ -11,6 +11,6 @@ export const PostUserSignupSchema = {
       pattern: "^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[$@$!%*#?&]).{8,}.$",
     },
   },
-  required: ["id", "pwd"],
+  required: ["user_id", "pwd"],
   additionalProperties: true,
 };
