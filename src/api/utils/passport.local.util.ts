@@ -29,7 +29,7 @@ export class PassportConfig {
 
         async (user_id: string, pwd: string, done) => {
           const usersModel: UsersModel = new UsersModel();
-          const user = await usersModel.read("id", user_id, false);
+          const user = await usersModel.read("user_id", user_id, false);
           if (!user)
             return done(null, false, {
               message: "아이디 혹은 비밀번호를 확인해주세요.",

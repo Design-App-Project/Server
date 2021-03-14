@@ -57,7 +57,7 @@ export class UsersMiddleware {
   checkAlreadyID = async (req: Request, res: Response, next: NextFunction) => {
     const usersModel: UsersModel = new UsersModel();
 
-    const user: IUser = await usersModel.read("id", req.body.user_id);
+    const user: IUser = await usersModel.read("user_id", req.body.user_id);
     if (!user) {
       next();
     } else {

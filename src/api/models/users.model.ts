@@ -10,7 +10,7 @@ export interface IUser extends mongoose.Document {
   interest: string;
 }
 
-type UserKey = "id";
+type UserKey = "user_id";
 
 export class UsersModel {
   constructor() {}
