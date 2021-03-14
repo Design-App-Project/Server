@@ -15,12 +15,18 @@ export class UsersRoute {
   configure() {
     const usersController = new UsersController();
     const usersMiddleware = new UsersMiddleware();
+    const authMiddleware = new AuthMiddleware();
 
     this.app.post("/api/v1/user/signup", [
       usersMiddleware.validatePostSignup,
       usersMiddleware.isNull,
       usersMiddleware.checkAlreadyID,
       usersController.createUser,
+    ]);
+
+    this.app.get("/api/v1/auth/signin", [
+      authMiddleware.verifyToken,
+      usersController.getProfile,
     ]);
 
     this.app.post("/api/v1/id", [

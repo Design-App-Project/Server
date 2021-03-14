@@ -46,8 +46,9 @@ export class UsersController {
   }
 
   async getProfile(req: Request, res: Response) {
+    console.log(req.body);
     const user: IUser = await Users.findOne({
-      user_id: req.body.decoded.user_id,
+      user_id: req.body.decoded.id,
     });
     res.status(200).send(ResponseUtil.successTrue(user));
   }

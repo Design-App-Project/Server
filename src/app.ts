@@ -47,9 +47,9 @@ app.use("/api/*", AuthMiddleware.blockCSRF);
 
 //route
 routes.push(new CompanyRoute(app));
-routes.push(new IndexRoute(app));
 routes.push(new UsersRoute(app));
 routes.push(new AuthRoute(app));
+routes.push(new IndexRoute(app));
 
 //editCsvUtil
 // new EditTypeOfDbFiled().StringToArray();

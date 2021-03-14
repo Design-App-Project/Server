@@ -6,6 +6,7 @@ import passport from "passport";
 import { ErrorUtil } from "../utils/error.util";
 import { ResponseUtil } from "../utils/response.util";
 import JWTUtil from "../utils/jwt.util";
+import { constants } from "buffer";
 
 export class AuthMiddleware {
   private ajv: Ajv;
@@ -28,7 +29,6 @@ export class AuthMiddleware {
       res.status(error.status).send(ResponseUtil.successFalse(error));
       return;
     }
-
     const jwtUtil = new JWTUtil();
     const verifyResult = jwtUtil.verifyToken(token, type);
 

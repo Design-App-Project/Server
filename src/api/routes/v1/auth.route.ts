@@ -17,17 +17,11 @@ export class AuthRoute {
     const validateMiddleware = new ValidateMiddleware();
     const authController = new AuthController();
     const authMiddleware = new AuthMiddleware();
-    const usersController = new UsersController();
 
     this.app.post("/api/v1/auth/signin", [
       validateMiddleware.authRoute,
       authMiddleware.verifyUserByLocalPassport,
       authController.createJWT,
-    ]);
-
-    this.app.get("/api/v1/auth/signin", [
-      authMiddleware.verifyToken,
-      usersController.getProfile,
     ]);
 
     this.app.get("/api/v1/auth/logout", [authController.logout]);
