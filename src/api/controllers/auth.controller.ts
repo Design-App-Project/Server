@@ -54,7 +54,7 @@ export class AuthController {
     const jwtUtil = new JWTUtil();
 
     const usersModel = new UsersModel();
-    const user = await usersModel.read("user_id", req.body.decoded.user_id);
+    const user = await usersModel.read("user_id", req.body.decoded.id);
 
     if (!user) {
       const error = jwtUtil.invalidTokenError;
