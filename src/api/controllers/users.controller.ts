@@ -57,11 +57,13 @@ export class UsersController {
       user_id: req.body.decoded.id,
     };
     const value = {
-      name: req.body.decoded.name,
-      introduce: req.body.decoded.introduce,
-      interest: req.body.decoded.interest,
+      name: req.body.name,
+      introduce: req.body.introduce,
+      interest: req.body.interest,
     };
-    const user: IUser = await Users.findOneAndUpdate(filter, value);
+    const user: IUser = await Users.findOneAndUpdate(filter, value, {
+      new: true,
+    });
     res.status(200).send(ResponseUtil.successTrue({}, ""));
   }
 
