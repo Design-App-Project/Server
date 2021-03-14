@@ -78,4 +78,19 @@ export class CompanyController {
       res.status(error.status).send(ResponseUtil.successFalse(error));
     }
   };
+
+  deleteUserInfo = async (req: Request, res: Response) => {
+    const data: IUser = await Users.findOneAndDelete({
+      id: req.body.id,
+    });
+    console.log("data:", data);
+    if (data) {
+      res
+        .status(200)
+        .send(ResponseUtil.successTrue({}, "회원 탈퇴 하였습니다."));
+    } else {
+      const error = ErrorUtil.badRequest(``, `존재하지 않는 아이디 입니다.`);
+      res.status(error.status).send(ResponseUtil.successFalse(error));
+    }
+  };
 }

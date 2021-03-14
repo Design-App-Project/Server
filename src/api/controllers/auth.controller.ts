@@ -44,7 +44,7 @@ export class AuthController {
 
       res
         .status(200)
-        .send(ResponseUtil.successTrue({ user }, "로그인에 성공했습니다."));
+        .send(ResponseUtil.successTrue(user, "로그인에 성공했습니다."));
     } catch (err) {
       res.status(500).send(err);
     }
