@@ -5,12 +5,12 @@ import path from "path";
 
 import { Models } from "./api/models";
 import { PassportConfig } from "./api/utils/passport.local.util";
-import { IndexRoute } from "./api/routes/v1/index.route";
-import { CompanyRoute } from "./api/routes/v1/company.route";
-import { EditTypeOfDbFiled } from "./api/utils/editTypeOfDbField.util";
-import { AuthMiddleware } from "./api/middlewares/auth.middleware";
 import { UsersRoute } from "./api/routes/v1/users.route";
 import { AuthRoute } from "./api/routes/v1/auth.route";
+import { CompanyRoute } from "./api/routes/v1/company.route";
+import { IndexRoute } from "./api/routes/v1/index.route";
+import { EditTypeOfDbFiled } from "./api/utils/editTypeOfDbField.util";
+import { AuthMiddleware } from "./api/middlewares/auth.middleware";
 
 const app: express.Application = express();
 const routes: any = [];
@@ -46,9 +46,9 @@ app.use(function (req, res, next) {
 app.use("/api/*", AuthMiddleware.blockCSRF);
 
 //route
-routes.push(new CompanyRoute(app));
 routes.push(new UsersRoute(app));
 routes.push(new AuthRoute(app));
+routes.push(new CompanyRoute(app));
 routes.push(new IndexRoute(app));
 
 //editCsvUtil

@@ -30,7 +30,12 @@ export class UsersController {
   }
 
   async createUserQuestion(req: Request, res: Response) {
-    const question: IQuestion = new Question(req.body);
+    const value = {
+      user_id: req.body.decoded.id,
+      text: req.body.text,
+      file: req.body.file,
+    };
+    const question: IQuestion = new Question(value);
     const data = await question.save();
     if (data) {
       res
@@ -67,33 +72,12 @@ export class UsersController {
     res.status(200).send(ResponseUtil.successTrue({}, ""));
   }
 
-  //   async allowedNickname(req: Request, res: Response) {
-  //     res.status(200).send(ResponseUtil.successTrue({}, ""));
-  //   }
-  // async updateNickname(req: Request, res: Response){
-  //   const usersModel = new UsersModel();
-
-  // }
-
-  //   async updateUser(req: Request, res: Response) {
-  //     const usersModel = new UsersModel();
-
-  //     let salt = crypto.randomBytes(16).toString("base64");
-  //     req.body.password = HashUtil.getHashedValue(req.body.password, salt);
-  //     req.body.salt = salt;
-  //     await usersModel.updateByEmail(req.body);
-
-  //     res
-  //       .status(200)
-  //       .send(ResponseUtil.successTrue({}, "비밀번호가 변경되었습니다."));
-  //   }
-
-  //   async deleteUser(req: Request, res: Response) {
-  //     const userModel: UsersModel = new UsersModel();
-  //     const filter = {
-  //       email: req.body.email,
-  //     };
-  //     await userModel.delete(filter);
-  //     res.status(200).send(ResponseUtil.successTrue({}));
-  //   }
+  async getUserInfo(req: Request, res: Response) {
+    console.log("");
+    const filter = {
+      user_id: req.body.decoded.id,
+    };
+    const question: IQuestion = await Question.find(filter);
+    res.status(200).send(ResponseUtil.successTrue(question, ""));
+  }
 }

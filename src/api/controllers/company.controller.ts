@@ -58,7 +58,7 @@ export class CompanyController {
   };
 
   // 문의내역 불러오기
-  getQuestions = async (req: Request, res: Response) => {
+  getAllQuestions = async (req: Request, res: Response) => {
     const data: IQuestion = await Question.find();
     if (data) {
       res.status(200).send(ResponseUtil.successTrue(data, ""));
@@ -69,7 +69,7 @@ export class CompanyController {
   };
 
   //회원 정보 불러오기
-  getUserInfo = async (req: Request, res: Response) => {
+  getAllUserInfo = async (req: Request, res: Response) => {
     const data: IUser = await Users.find();
     if (data) {
       res.status(200).send(ResponseUtil.successTrue(data, ""));

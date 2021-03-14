@@ -7,6 +7,7 @@ import { ErrorUtil } from "../utils/error.util";
 import { ResponseUtil } from "../utils/response.util";
 import JWTUtil from "../utils/jwt.util";
 import { constants } from "buffer";
+import { compileSchema } from "ajv/dist/compile";
 
 export class AuthMiddleware {
   private ajv: Ajv;
