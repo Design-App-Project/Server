@@ -1,4 +1,5 @@
 import { Application } from "express";
+import multer from "multer";
 
 import { AuthMiddleware } from "../../middlewares/auth.middleware";
 import { UsersMiddleware } from "../../middlewares/users.middleware";
@@ -16,6 +17,7 @@ export class UsersRoute {
     const usersController = new UsersController();
     const usersMiddleware = new UsersMiddleware();
     const authMiddleware = new AuthMiddleware();
+    const upload = multer({ dest: "./uploads/" });
 
     // 회원가입
     this.app.post("/api/v1/user/signup", [
@@ -40,7 +42,7 @@ export class UsersRoute {
     ]);
 
     // 마이페이지: 유저 문의 하기
-    this.app.post("/api/v1/user/question", [
+    this.app.post("/api/v1/user/question", upload.single("file"), [
       authMiddleware.verifyToken,
       usersController.createUserQuestion,
     ]);
