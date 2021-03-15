@@ -37,18 +37,10 @@ export class UsersController {
       file: req.files,
     };
     const question: IQuestion = new Question(value);
-    const data = await question.save();
-    if (data) {
-      res
-        .status(200)
-        .send(ResponseUtil.successTrue({}, "문의하기 성공하였습니다."));
-    } else {
-      const error = ErrorUtil.badRequest(
-        "",
-        "파일형식이 잘못되었습니다. or save실패"
-      );
-      res.status(error.status).send(ResponseUtil.successFalse(error));
-    }
+    await question.save();
+    res
+      .status(200)
+      .send(ResponseUtil.successTrue({}, "문의하기 성공하였습니다."));
   }
 
   async getProfile(req: Request, res: Response) {
