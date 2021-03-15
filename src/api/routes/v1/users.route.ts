@@ -58,10 +58,7 @@ export class UsersRoute {
     this.app.post(
       "/api/v1/user/question",
       upload.fields([{ name: "file" }, { name: "text" }]),
-      [
-        // authMiddleware.verifyToken,
-        usersController.createUserQuestion,
-      ]
+      [authMiddleware.verifyToken, usersController.createUserQuestion]
     );
 
     // 마이페이지: 유저 개인 문의 내역 불러오기

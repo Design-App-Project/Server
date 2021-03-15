@@ -30,7 +30,6 @@ export class UsersController {
   }
 
   async createUserQuestion(req: Request, res: Response) {
-    console.log("req.file:", req.file);
     console.log("req.files:", req.files);
     const value = {
       user_id: req.body.decoded.id,
