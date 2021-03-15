@@ -4,6 +4,7 @@ import multer from "multer";
 import { AuthMiddleware } from "../../middlewares/auth.middleware";
 import { UsersMiddleware } from "../../middlewares/users.middleware";
 import { UsersController } from "../../controllers/users.controller";
+import { time } from "console";
 
 export class UsersRoute {
   private app: Application;
@@ -18,6 +19,18 @@ export class UsersRoute {
     const usersMiddleware = new UsersMiddleware();
     const authMiddleware = new AuthMiddleware();
     const upload = multer({ dest: "./uploads/" });
+    // const IMG_PATH = "./uploads/";
+
+    // const storage = multer.diskStorage({
+    //   destination(req, file, callback) {
+    //     callback(null, IMG_PATH);
+    //   },
+    //   filename(req, file, callback) {
+    //     let timestamp = file.originalname;
+    //     callback(null, timestamp);
+    //   },
+    // });
+    // const upload = multer({ storage: storage });
 
     // 회원가입
     this.app.post("/api/v1/user/signup", [
@@ -42,10 +55,14 @@ export class UsersRoute {
     ]);
 
     // 마이페이지: 유저 문의 하기
-    this.app.post("/api/v1/user/question", upload.single("file"), [
-      authMiddleware.verifyToken,
-      usersController.createUserQuestion,
-    ]);
+    this.app.post(
+      "/api/v1/user/question",
+      upload.fields([{ name: "file" }, { name: "text" }]),
+      [
+        // authMiddleware.verifyToken,
+        usersController.createUserQuestion,
+      ]
+    );
 
     // 마이페이지: 유저 개인 문의 내역 불러오기
     this.app.get("/api/v1/user/question", [

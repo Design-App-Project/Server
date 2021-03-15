@@ -18,7 +18,6 @@ export class AuthMiddleware {
   }
 
   verifyToken = async (req: Request, res: Response, next: NextFunction) => {
-    console.log(req.files);
     const path = req.route.path;
     const type = path == "/api/v1/auth/access-token" ? "refresh" : "access";
     const token: string = req.cookies[`${type}-token`];
