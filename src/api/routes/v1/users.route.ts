@@ -54,6 +54,18 @@ export class UsersRoute {
       usersController.assureUniqueValue,
     ]);
 
+    // 유저: 즐겨찾기 등록
+    this.app.post("/api/v1/user/bookmark", [
+      authMiddleware.verifyToken,
+      usersController.postBookmark,
+    ]);
+
+    // 유저: 즐겨찾기 삭제
+    this.app.delete("/api/v1/user/bookmark", [
+      authMiddleware.verifyToken,
+      usersController.deleteBookmark,
+    ]);
+
     // 마이페이지: 유저 문의 하기
     this.app.post(
       "/api/v1/user/question",
@@ -79,9 +91,15 @@ export class UsersRoute {
     ]);
 
     // 마이페이지: 문의내역 파일 다운로드
-    this.app.get("api/v1/user/file", [
+    this.app.get("/api/v1/user/file", [
       authMiddleware.verifyToken,
       usersController.getQuestionFile,
+    ]);
+
+    //마이페이지: 즐겨찾기 불러오기
+    this.app.get("/api/v1/user/bookmark", [
+      authMiddleware.verifyToken,
+      usersController.getBookmark,
     ]);
   }
 }
