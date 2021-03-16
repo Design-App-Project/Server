@@ -1,9 +1,12 @@
 import mongoose from "mongoose";
 
 export interface IQuestion extends mongoose.Document {
+  date: Date;
   user_id: string;
   text: string;
   file: object;
+  email: string;
+  title: string;
 }
 
 export class QuestionModel {
@@ -11,6 +14,10 @@ export class QuestionModel {
 }
 
 const schema: mongoose.Schema = new mongoose.Schema({
+  date: {
+    type: Date,
+    default: Date.now,
+  },
   user_id: {
     type: String,
   },
@@ -19,6 +26,12 @@ const schema: mongoose.Schema = new mongoose.Schema({
   },
   file: {
     type: Object,
+  },
+  email: {
+    type: String,
+  },
+  title: {
+    type: String,
   },
 });
 

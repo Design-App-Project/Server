@@ -18,19 +18,19 @@ export class UsersRoute {
     const usersController = new UsersController();
     const usersMiddleware = new UsersMiddleware();
     const authMiddleware = new AuthMiddleware();
-    const upload = multer({ dest: "./uploads/" });
-    // const IMG_PATH = "./uploads/";
+    // const upload = multer({ dest: "./uploads/" });
+    const IMG_PATH = "src/api/routes/v1/uploads";
 
-    // const storage = multer.diskStorage({
-    //   destination(req, file, callback) {
-    //     callback(null, IMG_PATH);
-    //   },
-    //   filename(req, file, callback) {
-    //     let timestamp = file.originalname;
-    //     callback(null, timestamp);
-    //   },
-    // });
-    // const upload = multer({ storage: storage });
+    const storage = multer.diskStorage({
+      destination(req, file, callback) {
+        callback(null, IMG_PATH);
+      },
+      filename(req, file, callback) {
+        let timestamp = file.originalname;
+        callback(null, timestamp);
+      },
+    });
+    const upload = multer({ storage: storage });
 
     // 회원가입
     this.app.post("/api/v1/user/signup", [
@@ -57,7 +57,12 @@ export class UsersRoute {
     // 마이페이지: 유저 문의 하기
     this.app.post(
       "/api/v1/user/question",
-      upload.fields([{ name: "file" }, { name: "text" }]),
+      upload.fields([
+        { name: "file" },
+        { name: "text" },
+        { name: "email" },
+        { name: "title" },
+      ]),
       [authMiddleware.verifyToken, usersController.createUserQuestion]
     );
 
@@ -71,6 +76,12 @@ export class UsersRoute {
     this.app.put("/api/v1/user", [
       authMiddleware.verifyToken,
       usersController.editUserInfo,
+    ]);
+
+    // 마이페이지: 문의내역 파일 다운로드
+    this.app.get("api/v1/user/file", [
+      authMiddleware.verifyToken,
+      usersController.getQuestionFile,
     ]);
   }
 }

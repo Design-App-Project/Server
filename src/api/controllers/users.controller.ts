@@ -1,12 +1,14 @@
 import { Request, Response } from "express";
+import * as crypto from "crypto";
+import fs from "fs";
+import path from "path";
+import mime from "mime-types";
 
 import { UsersModel, IUser, Users } from "../models/users.model";
 import { IQuestion, Question } from "../models/question.model";
 import { HashUtil } from "../utils/hash.util";
 import { ResponseUtil } from "../utils/response.util";
 import { ErrorUtil } from "../utils/error.util";
-
-import * as crypto from "crypto";
 
 export class UsersController {
   constructor() {}
@@ -30,7 +32,6 @@ export class UsersController {
   }
 
   async createUserQuestion(req: Request, res: Response) {
-    console.log("req.files:", req.files);
     const value = {
       user_id: req.body.decoded.id,
       text: req.body.text,
@@ -66,11 +67,17 @@ export class UsersController {
   }
 
   async getUserInfo(req: Request, res: Response) {
-    console.log("");
     const filter = {
       user_id: req.body.decoded.id,
     };
     const question: IQuestion = await Question.find(filter);
     res.status(200).send(ResponseUtil.successTrue(question, ""));
+  }
+
+  async getQuestionFile(req: Request, res: Response) {
+    const uploadFolder = "src/api/routes/v1/uploads";
+    const filePath = uploadFolder + req.body.filename;
+
+    res.download(filePath, req.body.filename);
   }
 }
