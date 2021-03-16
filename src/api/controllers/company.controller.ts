@@ -70,7 +70,7 @@ export class CompanyController {
 
   //회원 정보 불러오기
   getAllUserInfo = async (req: Request, res: Response) => {
-    const data: IUser = await Users.find();
+    const data: IUser = await Users.find().populate("bookmark");
     if (data) {
       res.status(200).send(ResponseUtil.successTrue(data, ""));
     } else {

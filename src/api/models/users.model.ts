@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 export interface IUser extends mongoose.Document {
   user_id: string;
   pwd: string;
-  bookmark: [string];
+  bookmark: [mongoose.Schema.Types.ObjectId];
   selected: boolean;
   name: string;
   introduce: string;
@@ -44,10 +44,9 @@ const schema: mongoose.Schema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  bookmark: {
-    type: [String],
-    required: false,
-  },
+  bookmark: [
+    { type: mongoose.Schema.Types.ObjectId, required: false, ref: "Company" },
+  ],
   selected: {
     type: Boolean,
     required: false,
