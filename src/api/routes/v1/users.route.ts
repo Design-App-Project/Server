@@ -81,7 +81,7 @@ export class UsersRoute {
     // 마이페이지: 유저 개인 문의 내역 불러오기
     this.app.get("/api/v1/user/question", [
       authMiddleware.verifyToken,
-      usersController.getUserInfo,
+      usersController.getUserQuestion,
     ]);
 
     // 마이페이지: 유저 개인 정보 수정

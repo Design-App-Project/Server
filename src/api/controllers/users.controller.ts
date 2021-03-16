@@ -68,11 +68,12 @@ export class UsersController {
     res.status(200).send(ResponseUtil.successTrue({}, ""));
   }
 
-  async getUserInfo(req: Request, res: Response) {
+  async getUserQuestion(req: Request, res: Response) {
     const filter = {
       user_id: req.body.decoded.id,
     };
     const question: IQuestion = await Question.find(filter);
+
     res.status(200).send(ResponseUtil.successTrue(question, ""));
   }
 
@@ -94,10 +95,8 @@ export class UsersController {
     const filter = { user_id: req.body.decoded.id };
     const value = { bookmark: req.body.bookmark };
 
-    const user: IUser = await Users.findOneAndUpdate(filter, value, {
-      new: true,
-    });
-    console.log(user);
+    const user: IUser = await Users.updateOne(filter, { $push: value });
+
     res
       .status(200)
       .send(ResponseUtil.successTrue({}, "즐겨찾기가 등록되었습니다."));
