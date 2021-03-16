@@ -18,8 +18,7 @@ export class UsersRoute {
     const usersController = new UsersController();
     const usersMiddleware = new UsersMiddleware();
     const authMiddleware = new AuthMiddleware();
-    // const upload = multer({ dest: "./uploads/" });
-    const IMG_PATH = "src/api/routes/v1/uploads";
+    const IMG_PATH = "src/api/routes/v1/uploads/question";
 
     const storage = multer.diskStorage({
       destination(req, file, callback) {

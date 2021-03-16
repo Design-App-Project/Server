@@ -1,4 +1,6 @@
 import { Application } from "express";
+import multer from "multer";
+
 import { CompanyController } from "../../controllers/company.controller";
 
 export class CompanyRoute {
@@ -11,6 +13,18 @@ export class CompanyRoute {
 
   configure() {
     const companyController = new CompanyController();
+    const IMG_PATH = "src/api/routes/v1/uploads/company";
+
+    const storage = multer.diskStorage({
+      destination(req, file, callback) {
+        callback(null, IMG_PATH);
+      },
+      filename(req, file, callback) {
+        let timestamp = file.originalname;
+        callback(null, timestamp);
+      },
+    });
+    const upload = multer({ storage: storage });
 
     // 전체 회사 정보
     this.app.get("/api/v1/material", [companyController.getAllData]);
@@ -28,7 +42,22 @@ export class CompanyRoute {
     this.app.delete("/api/v1/admin/user", [companyController.deleteUserInfo]);
 
     // 관리자페이지: 업체 추가
-    this.app.post("/api/v1/admin/company", [companyController.addCompany]);
+    this.app.post(
+      "/api/v1/admin/company",
+      upload.fields([
+        { name: "id" },
+        { name: "img_path" },
+        { name: "title" },
+        { name: "address" },
+        { name: "telephone" },
+        { name: "sample_imgs" },
+        { name: "likes" },
+        { name: "tag" },
+        { name: "category" },
+        { name: "open" },
+      ]),
+      [companyController.addCompany]
+    );
 
     // 관리자페이지: 업체 삭제
     this.app.delete("/api/v1/admin/company", [companyController.removeCompany]);

@@ -36,7 +36,19 @@ export class CompanyController {
 
   // 업체 추가 api
   addCompany = async (req: Request, res: Response) => {
-    const company: any = new Company(req.body);
+    const value = {
+      id: req.body.id,
+      img_path: req.files,
+      title: req.body.title,
+      address: req.body.address,
+      telephone: req.body.telephone,
+      sample_imgs: req.files,
+      likes: req.body.likes,
+      tag: req.body.tag,
+      category: req.body.category,
+      open: req.body.open,
+    };
+    const company: any = new Company(value);
     await company.save();
     res.status(200).send(ResponseUtil.successTrue({}, ""));
   };
