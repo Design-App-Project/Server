@@ -48,6 +48,7 @@ export class CompanyController {
       category: req.body.category,
       open: req.body.open,
     };
+    console.log(value);
     const company: any = new Company(value);
     await company.save();
     res.status(200).send(ResponseUtil.successTrue({}, ""));

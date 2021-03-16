@@ -6,7 +6,7 @@ export interface ICompany extends mongoose.Document {
   title: string;
   address: string;
   telephone: string;
-  sample_imgs: [string];
+  sample_imgs: [object];
   likes: number;
   tag: [string];
   open: [string];
@@ -66,9 +66,11 @@ const schema: mongoose.Schema = new mongoose.Schema({
   telephone: {
     type: String,
   },
-  sample_imgs: {
-    type: [String],
-  },
+  sample_imgs: [
+    {
+      type: Object,
+    },
+  ],
   likes: {
     type: Number,
   },
