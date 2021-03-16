@@ -86,7 +86,9 @@ export class UsersController {
 
   async getBookmark(req: Request, res: Response) {
     const filter = { user_id: req.body.decoded.id };
-    const data: IUser = await Users.find(filter).select("bookmark");
+    const data: IUser = await Users.find(filter)
+      .select("bookmark")
+      .populate("bookmark");
 
     res.status(200).send(ResponseUtil.successTrue(data, ""));
   }
