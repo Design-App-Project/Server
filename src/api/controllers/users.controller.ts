@@ -77,7 +77,7 @@ export class UsersController {
   }
 
   async getQuestionFile(req: Request, res: Response) {
-    const uploadFolder = "src/api/routes/v1/uploads";
+    const uploadFolder = "src/api/routes/v1/uploads/";
     const filePath = uploadFolder + req.body.filename;
 
     res.download(filePath, req.body.filename);
@@ -97,7 +97,7 @@ export class UsersController {
     const user: IUser = await Users.findOneAndUpdate(filter, value, {
       new: true,
     });
-
+    console.log(user);
     res
       .status(200)
       .send(ResponseUtil.successTrue({}, "즐겨찾기가 등록되었습니다."));
@@ -108,7 +108,7 @@ export class UsersController {
     const value = { bookmark: req.body.bookmark };
 
     const user: IUser = await Users.updateOne(filter, {
-      $pullAll: value,
+      $pull: value,
     });
 
     res
