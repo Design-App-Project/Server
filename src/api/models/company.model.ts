@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 export interface ICompany extends mongoose.Document {
   category: string;
-  img_path: string;
+  img_path: object;
   title: string;
   address: string;
   telephone: string;
@@ -55,7 +55,7 @@ const schema: mongoose.Schema = new mongoose.Schema({
     type: String,
   },
   img_path: {
-    type: String,
+    type: Object,
   },
   title: {
     type: String,

@@ -2,6 +2,7 @@ import { Application } from "express";
 import multer from "multer";
 
 import { CompanyController } from "../../controllers/company.controller";
+import { AuthMiddleware } from "../../middlewares/auth.middleware";
 
 export class CompanyRoute {
   private app: Application;
@@ -13,6 +14,8 @@ export class CompanyRoute {
 
   configure() {
     const companyController = new CompanyController();
+    const authMiddleware = new AuthMiddleware();
+
     const IMG_PATH = "src/api/routes/v1/uploads/company";
 
     const storage = multer.diskStorage({
@@ -56,7 +59,7 @@ export class CompanyRoute {
         { name: "category" },
         { name: "open" },
       ]),
-      [companyController.addCompany]
+      [authMiddleware.verifyToken, companyController.addCompany]
     );
 
     // 관리자페이지: 업체 삭제

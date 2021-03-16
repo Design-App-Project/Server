@@ -37,7 +37,7 @@ export class CompanyController {
   // 업체 추가 api
   addCompany = async (req: Request, res: Response) => {
     const value = {
-      id: req.body.id,
+      id: req.body.decoded.id,
       img_path: req.files,
       title: req.body.title,
       address: req.body.address,
