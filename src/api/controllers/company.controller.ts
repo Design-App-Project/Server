@@ -43,12 +43,11 @@ export class CompanyController {
       address: req.body.address,
       telephone: req.body.telephone,
       sample_imgs: req.files,
-      likes: req.body.likes,
+      likes: 0,
       tag: req.body.tag,
       category: req.body.category,
       open: req.body.open,
     };
-    console.log(value);
     const company: any = new Company(value);
     await company.save();
     res.status(200).send(ResponseUtil.successTrue({}, ""));
