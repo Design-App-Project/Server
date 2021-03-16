@@ -36,6 +36,8 @@ export class UsersController {
       user_id: req.body.decoded.id,
       text: req.body.text,
       file: req.files,
+      title: req.body.title,
+      email: req.body.email,
     };
     const question: IQuestion = new Question(value);
     await question.save();
