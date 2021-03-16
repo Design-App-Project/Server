@@ -16,7 +16,7 @@ export class CompanyRoute {
     const companyController = new CompanyController();
     const authMiddleware = new AuthMiddleware();
 
-    const IMG_PATH = "src/api/routes/v1/uploads/company";
+    const IMG_PATH = "uploads/company";
 
     const storage = multer.diskStorage({
       destination(req, file, callback) {

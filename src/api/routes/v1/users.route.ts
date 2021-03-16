@@ -4,7 +4,6 @@ import multer from "multer";
 import { AuthMiddleware } from "../../middlewares/auth.middleware";
 import { UsersMiddleware } from "../../middlewares/users.middleware";
 import { UsersController } from "../../controllers/users.controller";
-import { time } from "console";
 
 export class UsersRoute {
   private app: Application;
@@ -18,7 +17,7 @@ export class UsersRoute {
     const usersController = new UsersController();
     const usersMiddleware = new UsersMiddleware();
     const authMiddleware = new AuthMiddleware();
-    const IMG_PATH = "src/api/routes/v1/uploads/question";
+    const IMG_PATH = "uploads/question";
 
     const storage = multer.diskStorage({
       destination(req, file, callback) {
