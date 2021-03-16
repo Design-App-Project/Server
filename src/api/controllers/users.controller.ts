@@ -78,7 +78,7 @@ export class UsersController {
   }
 
   async getQuestionFile(req: Request, res: Response) {
-    const uploadFolder = "src/api/routes/v1/uploads/question/";
+    const uploadFolder = "uploads/question/";
     const filePath = uploadFolder + req.body.filename;
 
     res.download(filePath, req.body.filename);
