@@ -79,8 +79,8 @@ export class UsersController {
 
   async getQuestionFile(req: Request, res: Response) {
     const uploadFolder = "uploads/question/";
-    const filePath = uploadFolder + req.params.id
-    const filename = req.params.id
+    const filePath = uploadFolder + req.params.filename
+    const filename = req.params.filename
 
     res.download(filePath, filename);
   }
