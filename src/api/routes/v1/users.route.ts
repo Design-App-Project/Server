@@ -89,7 +89,7 @@ export class UsersRoute {
     ]);
 
     // 마이페이지: 문의내역 파일 다운로드
-    this.app.get("/api/v1/user/file", [
+    this.app.post("/api/v1/user/file", [
       authMiddleware.verifyToken,
       usersController.getQuestionFile,
     ]);

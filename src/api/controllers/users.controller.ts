@@ -81,6 +81,7 @@ export class UsersController {
     const uploadFolder = "uploads/question/";
     const filePath = uploadFolder + req.body.filename;
 
+    console.log(req.body.filename)
     res.download(filePath, req.body.filename);
   }
 
