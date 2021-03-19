@@ -82,7 +82,8 @@ export class UsersController {
     const filePath = uploadFolder + req.params.filename
     const filename = req.params.filename
 
-    res.download(filePath, filename);
+    console.log(filePath,filename)
+    res.sendFile(filePath);
   }
 
   async getBookmark(req: Request, res: Response) {
