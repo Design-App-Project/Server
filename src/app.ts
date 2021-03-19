@@ -43,7 +43,7 @@ app.use(function (req, res, next) {
 });
 
 // // block CSRF
-app.use("/api/*", AuthMiddleware.blockCSRF);
+// app.use("/api/*", AuthMiddleware.blockCSRF);
 
 //route
 routes.push(new UsersRoute(app));
