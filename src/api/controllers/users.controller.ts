@@ -79,10 +79,10 @@ export class UsersController {
 
   async getQuestionFile(req: Request, res: Response) {
     const uploadFolder = "uploads/question/";
-    const filePath = uploadFolder + req.body.filename;
+    const filePath = uploadFolder + req.params.id
+    const filename = req.params.id
 
-    console.log(req.body.filename)
-    res.download(filePath, req.body.filename);
+    res.download(filePath, filename);
   }
 
   async getBookmark(req: Request, res: Response) {
