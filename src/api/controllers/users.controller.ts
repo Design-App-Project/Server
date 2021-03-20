@@ -78,10 +78,9 @@ export class UsersController {
   }
 
   async getQuestionFile(req: Request, res: Response) {
-    const filePath = "/home/ubuntu/Server/uploads/question/"
     const filename = req.params.filename
-    
-    res.sendFile(filePath+filename);
+    const PATH = path.join(__dirname,'../../../uploads/question',filename)
+    res.sendFile(PATH)
   }
 
   async getBookmark(req: Request, res: Response) {
