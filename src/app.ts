@@ -32,7 +32,7 @@ passportConfig.run();
 
 // cors config
 app.use(function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", "3.18.72.134");
+  res.header("Access-Control-Allow-Origin", ["3.18.72.134","meester.co.kr"],);
   res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
   res.header(
     "Access-Control-Allow-Headers",
