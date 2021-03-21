@@ -80,6 +80,8 @@ export class UsersController {
   async getQuestionFile(req: Request, res: Response) {
     const filename = req.params.filename
     const PATH = path.join(__dirname,'../../../uploads/question',filename)
+    res.setHeader('Content-Type','application/octet-stream');
+    res.setHeader('Content-Disposition','attachment; filename'+filename);
     res.sendFile(PATH)
   }
 
