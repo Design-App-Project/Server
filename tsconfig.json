@@ -13,7 +13,7 @@
       "./node_modules/@types",
       "./@types"
     ],
-    "outDir": "dist/src"
+    "outDir": "distribute"
   },
   "exclude": ["node_modules"]
 }
