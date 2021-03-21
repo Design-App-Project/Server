@@ -12,6 +12,7 @@ import { IndexRoute } from "./api/routes/v1/index.route";
 import { EditTypeOfDbFiled } from "./api/utils/editTypeOfDbField.util";
 import { AuthMiddleware } from "./api/middlewares/auth.middleware";
 
+
 const app: express.Application = express();
 const routes: any = [];
 const passportConfig = new PassportConfig();
