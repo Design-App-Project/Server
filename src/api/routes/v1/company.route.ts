@@ -34,6 +34,12 @@ export class CompanyRoute {
     // 필터링 정보
     this.app.post("/api/v1/filtering", [companyController.getFilteredData]);
 
+    // 간판 이미지 불러오기
+    this.app.get("/api/v1/signboard/:filename",[companyController.getSignBoard])
+
+    // 상세 이미지 불러오기
+    this.app.get("/api/v1/sample/:filename",[companyController.getSampleImgs])
+
     // ** 관리자 페이지 API ** //
     // 관리자페이지: 모든 유저 문의 내역 불러오기
     this.app.get("/api/v1/admin/question", [companyController.getAllQuestions]);

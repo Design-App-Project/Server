@@ -120,6 +120,6 @@ dist
 .env
 
 # 업체 이미지 폴더
-DETAIL
-HEAD
+signboard
+sample
 

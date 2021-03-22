@@ -4,6 +4,7 @@ import { IQuestion, Question } from "../models/question.model";
 import { IUser, Users } from "../models/users.model";
 import { ErrorUtil } from "../utils/error.util";
 import { ResponseUtil } from "../utils/response.util";
+import path from "path";
 
 export class CompanyController {
   private companyModel: CompanyModel;
@@ -104,4 +105,20 @@ export class CompanyController {
       res.status(error.status).send(ResponseUtil.successFalse(error));
     }
   };
+
+  async getSignBoard(req: Request, res: Response) {
+    const filename = req.params.filename
+    const PATH = path.join(__dirname,'../../../company_imgs/signboard',filename)
+    res.setHeader('Content-Type','application/octet-stream; charset=utf-8',);
+    res.setHeader('Content-Disposition','attachment; filename='+encodeURIComponent(filename));
+    res.sendFile(PATH)
+  }
+
+  async getSampleImgs(req: Request, res: Response) {
+    const filename = req.params.filename
+    const PATH = path.join(__dirname,'../../../company_imgs/sample',filename)
+    res.setHeader('Content-Type','application/octet-stream; charset=utf-8',);
+    res.setHeader('Content-Disposition','attachment; filename='+encodeURIComponent(filename));
+    res.sendFile(PATH)
+  }
 }
