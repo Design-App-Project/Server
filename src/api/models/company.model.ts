@@ -2,11 +2,11 @@ import mongoose from "mongoose";
 
 export interface ICompany extends mongoose.Document {
   category: string;
-  img_path: object;
+  img_path: string;
   title: string;
   address: string;
   telephone: string;
-  sample_imgs: [object];
+  sample_imgs: [string];
   likes: number;
   tag: [string];
   open: [string];
@@ -22,6 +22,10 @@ export class CompanyModel {
 
   async readAllData(fields: any) {
     return await Company.find();
+  }
+
+  async read(fields:any){
+    return await Company.find({},`${fields} -_id`)
   }
 
   async readFilteredData(fields: any) {
@@ -55,7 +59,7 @@ const schema: mongoose.Schema = new mongoose.Schema({
     type: String,
   },
   img_path: {
-    type: Object,
+    type: String,
   },
   title: {
     type: String,
@@ -66,11 +70,9 @@ const schema: mongoose.Schema = new mongoose.Schema({
   telephone: {
     type: String,
   },
-  sample_imgs: [
-    {
-      type: Object,
-    },
-  ],
+  sample_imgs: {
+      type: [String],
+  },
   likes: {
     type: Number,
   },

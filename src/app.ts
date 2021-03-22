@@ -44,7 +44,7 @@ app.use(function (req, res, next) {
 });
 
 // // block CSRF
-// app.use("/api/*", AuthMiddleware.blockCSRF);
+app.use("/api/v1/user/file/*", AuthMiddleware.blockCSRF);
 
 //route
 routes.push(new UsersRoute(app));
@@ -54,5 +54,7 @@ routes.push(new IndexRoute(app));
 
 //editCsvUtil
 // new EditTypeOfDbFiled().StringToArray();
+// new EditTypeOfDbFiled().insertHeadImgToDB();
+// new EditTypeOfDbFiled().insertDetailImgToDB();
 
 export default app;
